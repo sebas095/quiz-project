@@ -12,3 +12,10 @@ exports.answer = function(req, res){
 		res.render('quizes/answer',{respuesta: 'Incorrecto'});
 	}
 };
+
+exports.authors = function(req, res){
+	res.render('author',{autores: '<img src="/images/perfil.jpg" width="120" height="150" alt="Photo Perfil"/><br><h3>Sebastian Duque Restrepo</h3>'});
+};
+
+
+
