@@ -4,8 +4,8 @@ var app = express();
 // en :id? la interrogacion indica opcional
 //	-> Reconoce /user  /user/Pepe,  /user/14, ...
 
-app.get('/user/:id?', function(req, res){
-	res.send('User ' + (req.params.id || 'anónimo'));
+app.get('/user/(:\\?id)?', function(req, res){
+	res.send('User ' + (req.params.id));
 });
 
 // Parametros se restringen con RegExp entre paréntesis
