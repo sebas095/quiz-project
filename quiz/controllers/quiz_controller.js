@@ -22,7 +22,7 @@ exports.index = function(req, res){
 		models.Quiz.findAll().then(function (quizes){
 				res.render('quizes/index.ejs', {quizes: quizes, errors: []});
         		}
-     		).catch(function(error) { next(error);})
+     		).catch(function(error){ next(error); });
 	}
 	else{
 		busqueda = '%'+busqueda.replace(/ /g,'%')+'%';
@@ -53,7 +53,7 @@ exports.create = function(req, res){
 		}
 		else{
 			// guarda en DB los campos pregunta y respuesta de quiz
-			quiz.save({ fields: ["pregunta", "respuesta"]}).then(function(){
+			quiz.save({ fields: ["pregunta", "respuesta", "tema"]}).then(function(){
 				res.redirect('/quizes');
 			}) // Redireccion HTPP (URL relativo) lista de preguntas
 		}
@@ -72,13 +72,14 @@ exports.edit = function(req, res){
 exports.update = function(req, res){
 	req.quiz.pregunta = req.body.quiz.pregunta;
 	req.quiz.respuesta = req.body.quiz.respuesta;
+	req.quiz.tema = req.body.quiz.tema;
 
 	req.quiz.validate().then(function(err){
 		if(err){
 			res.render('quizes/edit', { quiz:req.quiz, errors: err.errors});
 		}
 		else{
-			req.quiz.save({ fields: ["pregunta","respuesta"]})// guarda en DB los campos pregunta y respuesta de quiz
+			req.quiz.save({ fields: ["pregunta","respuesta", "tema"]})// guarda en DB los campos pregunta y respuesta de quiz
 			.then(function(){
 				res.redirect('/quizes'); // Redireccion HTPP (URL relativo) lista de preguntas
 			});

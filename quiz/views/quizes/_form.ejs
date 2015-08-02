@@ -1,16 +1,25 @@
-<labe<label for="preg" class="rem">Pregunta:</label>
-<input type="text" id="preg" name="quiz[pregunta]" placeholder="Escriba Pregunta" value = 
+&nbsp&nbsp&nbsp<label for="preg" class="rem">Pregunta:</label>
+&nbsp&nbsp<input type="text" id="preg" name="quiz[pregunta]" placeholder="Escriba Pregunta" value = 
  	<% if (quiz.pregunta == 'Pregunta') {%>
        	""
     <% } else { %>
         "<%= quiz.pregunta %>"
     <% } %>/><p>
-<label for="resp" class="rem">Respuesta:</label>
+&nbsp&nbsp&nbsp<label for="resp" class="rem">Respuesta:</label>
 <input type="text" id="resp" name="quiz[respuesta]" placeholder="Escriba Respuesta" value = 
  	<% if (quiz.respuesta == 'Respuesta') {%>
        	""
     <% } else { %>
         "<%= quiz.respuesta %>"
-    <% } %>/><p>
+    <% } %>/><br><label class="rem">Tema:</label>
+<select name="tema">
+	<option value="humanidades">Humanidades</option>
+	<option value="ocio">Ocio</option>
+	<option value="tecnologia">Tecnologia</option>
+	<option value="ciencia">Ciencia</option>
+	<option value="otro" selected>Otro</option> 
+</select><p/>
+<br>
 <a href="/quizes"><button type="button">Cancelar</button></a>
+&nbsp&nbsp
 <input type="submit" value="Salvar">
