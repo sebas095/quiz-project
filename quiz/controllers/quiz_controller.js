@@ -17,27 +17,21 @@ exports.load = function(req, res, next, quizId){
 
 // GET /quizes/
 exports.index = function(req, res){
-	var busqueda = req.query.search;
-	if(busqueda === undefined){
-		models.Quiz.findAll().then(function (quizes){
-				res.render('quizes/index.ejs', {quizes: quizes, errors: []});
-        		}
-     		).catch(function(error){ next(error); });
+	var search = '%';
+	if (req.query.search) {
+		search = req.query.search.replace(/ /g, '%');
+		search = search.split("+").join("%");
+		search = '%'+search+'%';
 	}
-	else{
-		busqueda = '%'+busqueda.replace(/ /g,'%')+'%';
-		models.Quiz.findAll({where:["pregunta LIKE ?", busqueda], order:"question"}).then(function(quizes){
-			res.render('quizes/index.ejs', { quizes: quizes, errors: [] });
-			}
-		).catch(function(error){ next(error); });
-	}
-		
+	models.Quiz.findAll({where: ["pregunta like ?", search], order :"pregunta ASC"}).then(
+		function(quizes){res.render('quizes/index',{quizes: quizes, errors:[]});
+	}).catch(function(error){next(error);})		
 };
 
 // GET /quizes/new
 exports.new = function(req, res){
 	var quiz = models.Quiz.build(// crea objeto quiz
-		{ pregunta: "Pregunta", respuesta: "Respuesta"}
+		{ pregunta: "Pregunta", respuesta: "Respuesta", tema: "otro"}
 	);
 
 	res.render('quizes/new', { quiz: quiz, errors: [] });
