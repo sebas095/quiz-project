@@ -12,13 +12,15 @@
     <% } else { %>
         "<%= quiz.respuesta %>"
     <% } %>/><br><label class="rem">Tema:</label>
-<select name="tema">
-	<option value="humanidades">Humanidades</option>
-	<option value="ocio">Ocio</option>
-	<option value="tecnologia">Tecnologia</option>
-	<option value="ciencia">Ciencia</option>
-	<option value="otro" selected>Otro</option> 
+
+<select name="quiz[tema]">
+	<option value="humanidades" <% if (quiz.tema === 'humanidades'){ %> selected  <% } %> >Humanidades</option>
+	<option value="ocio" <% if (quiz.tema === 'ocio'){ %> selected  <% } %>>Ocio</option>
+	<option value="tecnologia" <% if (quiz.tema === 'tecnologia'){ %> selected  <% } %> >Tecnologia</option>
+	<option value="ciencia" <% if (quiz.tema === 'ciencia'){ %> selected  <% } %> >Ciencia</option>
+	<option value="otro" <% if (quiz.tema === 'otro'){ %> selected  <% } %> >Otro</option> 
 </select><p/>
+
 <br>
 <a href="/quizes"><button type="button">Cancelar</button></a>
 &nbsp&nbsp
