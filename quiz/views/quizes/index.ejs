@@ -2,15 +2,17 @@
 <% var i; for (i=0; i < quizes.length; i++){ %>
 	<tr>
 		<td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
-		<td><%= quizes[i].tema %></td><% console.log(quizes[i].tema+'\n'); %>
+		<td><%= quizes[i].tema %></td>
+		<% if(session.user){%>
 		<td><a href='quizes/<%= quizes[i].id %>/edit'><button>editar</button></a></td>
 		<td>
 			<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
-			<button type="submit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
-				borrar
-			</button>
+				<button type="submit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
+					borrar
+				</button>
 			</form>
 		</td>
+		<% } %>
 	</tr>
 <% } %>
 </table><p>
@@ -18,4 +20,6 @@
 	<input type="text" name="search" placeholder="Busque aquí"/>
 	<input type="submit" value="Buscar" />
 </form>
+<% if(session.user){ %>
 <br><br><a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+<% } %>
